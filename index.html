@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecretExploits</title>
+    <style>
+        body {
+            background-color: #181818;
+            color: #FFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #B388FF;
+        }
+
+        .key-box {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .key-box span {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #FFF;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #6200EE;
+            color: #FFF;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #3700B3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SecretExploits</h1>
+        <div class="key-box">
+            <span id="key">Loading...</span>
+        </div>
+        <button id="copyBtn">Copy Key</button>
+    </div>
+
+    <script>
+        async function fetchKey() {
+            const response = await fetch('/api/generateKey');
+            const data = await response.json();
+            document.getElementById('key').textContent = data.key;
+        }
+
+        document.getElementById('copyBtn').addEventListener('click', () => {
+            const key = document.getElementById('key').textContent;
+            navigator.clipboard.writeText(key);
+            alert('Key copied to clipboard!');
+        });
+
+        fetchKey();
+    </script>
+</body>
+</html>
