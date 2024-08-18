@@ -64,7 +64,7 @@
 
     <script>
         async function fetchKey() {
-            const response = await fetch('/api/generateKey');
+            const response = await fetch('/generateKey');
             const data = await response.json();
             document.getElementById('key').textContent = data.key;
         }
